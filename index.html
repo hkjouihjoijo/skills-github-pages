@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mother's Day Slideshow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: url('https://i.pinimg.com/736x/57/75/9e/57759e336a8fb65b8d05f17dbfb6533d.jpg') no-repeat center center fixed;
+      background-size: cover; /* Ensures the background image covers the entire screen */
+      font-family: 'Brush Script MT', cursive;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .petal {
+      position: fixed;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/009/267/724/non_2x/element-flower-icon-free-png.png');
+      background-size: cover;
+      opacity: 0.8;
+      animation: fall 5s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen text-center p-4 flower">
+  <!-- Background music -->
+  <audio id="bgMusic" autoplay controls class="mb-4">
+    <source src="En Thaaye.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Floating petals -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDelay = Math.random() * 10 + 's';
+      petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+      document.body.appendChild(petal);
+    }
+  </script>
+
+  <div id="slideshow" class="w-full max-w-3xl bg-white bg-opacity-70 p-8 rounded-2xl shadow-xl z-10">
+    <div class="slide active text-pink-900 text-4xl font-semibold">💐💐 Happy Mother's Day AMMA! 💐💐</div>
+    <div class="slide text-pink-700 text-4xl">🌸🌸 This is a small gift for you 🌸🌸</div>
+    <div class="slide text-pink-700 text-3xl">[Press Button At 0.16]</div>
+    <div class="slide text-pink-700 text-3xl">🌏 You're my one and only world — That's you, My mother 🌏</div>
+    <div class="slide text-pink-700 text-3xl">💗 Overflowing love, giving without end — Like a star that never fades, that's you 🌟</div>
+    <div class="slide text-pink-700 text-3xl">🏅 No one can surpass you in love, you're like a stunning friend — A sky that stays with me, you give me that feeling 🏅</div>
+    <div class="slide text-pink-700 text-3xl">🌊 Like words written on water, all worries vanish in your presence. With your strength beside me, there's no fear left, no more 💪🏽</div>
+    <div class="slide text-pink-700 text-3xl">🌏 You're my one and only world — That's you, My mother 🌏</div>
+    <div class="slide text-pink-700 text-3xl">💗 Overflowing love, giving without end — Like a star that never fades, that's you 🌟</div>
+    <div class="slide text-pink-700 text-3xl italic">🎶🎵~~ INSTRUMENTAL ~~🎵🎶</div>
+    <div class="slide text-pink-700 text-3xl">🫂 So what if relationships come and go? So what if relatives come into my life? Your love alone is forever constant 💓</div>
+    <div class="slide text-pink-700 text-3xl">😔 Even if a thousand worries come my way — They all disappear when I'm near you 😌</div>
+    <div class="slide text-pink-700 text-3xl">🫶🏽 Even if we've had hundreds of fights — In the next moment, we're friends again 👩‍👧</div>
+    <div class="slide text-pink-700 text-3xl">🫕 Even if other foods are served, I am still a loyal to your cooking 👩🏽‍🍳</div>
+    <div class="slide text-pink-700 text-3xl">🤱🏽 Even if I am born again — Will I ever get a mother like you again 🤱🏽</div>
+    <div class="slide text-pink-700 text-3xl">🌏 You're my one and only world — that's you, My mother 🌏</div>
+    <div class="slide text-pink-700 text-3xl">💗 Overflowing love, giving without end — Like a star that never fades, that's you 🌟</div>
+    <div class="slide text-pink-700 text-3xl">🏅 No one can surpass you in love, you're like a stunning friend — A sky that stays with me, you give me that feeling 🏅</div>
+    <div class="slide text-pink-700 text-3xl">🌊 Like words written on water, all worries vanish in your presence. With your strength beside me, there's no fear left, no more 💪🏽</div>
+    <div class="slide text-pink-700 text-3xl">🌏 You're my one and only world — That's you, My mother 🌏</div>
+    <div class="slide text-pink-700 text-3xl">💗 Overflowing love, giving without end — Like a star that never fades, that's you 🌟</div>
+  </div>
+  <button onclick="nextSlide()" class="mt-6 px-6 py-2 bg-pink-300 hover:bg-pink-400 text-white font-semibold rounded-lg shadow-md">➔</button>
+
+  <script>
+  let slides;
+  let currentSlide = 0;
+  const slideInterval = 4000;
+  const totalTime = 240000;
+  let startTime;
+  let slideTimer;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  function startSlideshow() {
+    clearInterval(slideTimer);
+    startTime = Date.now();
+    showSlide(currentSlide);
+    slideTimer = setInterval(() => {
+      if (Date.now() - startTime < totalTime) {
+        nextSlide();
+      } else {
+        currentSlide = 0;
+        showSlide(currentSlide);
+        startTime = Date.now();
+      }
+    }, slideInterval);
+  }
+
+  window.addEventListener('load', () => {
+    slides = document.querySelectorAll('.slide');
+    currentSlide = 0;
+    
+    // Add petals
+    for (let i = 0; i < 30; i++) {
+      const petal = document.createElement('div');
+      const type = 'petal-' + (1 + Math.floor(Math.random() * 3));
+      petal.classList.add('petal', type);
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+      petal.style.animationDelay = Math.random() * 10 + 's';
+      document.body.appendChild(petal);
+    }
+
+    const letter = document.getElementById('letter');
+    letter.classList.add('active');
+
+    const music = document.getElementById('bgMusic');
+    if (music.readyState >= 2) {
+      music.play().then(() => {
+        startSlideshow();
+      }).catch(() => {
+        startSlideshow();
+      });
+    } else {
+      music.addEventListener('canplay', () => {
+        music.play();
+        startSlideshow();
+      }, { once: true });
+    }
+  });
+</script>
